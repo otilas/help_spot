@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{help_spot}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jamie Wilson", "Jesse Newland"]
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "config/help_spot.yml.sample",
+     "help_spot.gemspec",
      "lib/help_spot.rb",
      "spec/help_spot_spec.rb",
      "spec/spec_helper.rb"
