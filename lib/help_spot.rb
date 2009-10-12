@@ -25,13 +25,13 @@ module HelpSpot
   class << self
 
     # Loads the config file.
-    # 
+    #
     # == Options
     # * config_file (optional)
     #     Defaults to '/config/help_spot.yml'
     #     Shouldn't be required when using merb or Rails.
     #
-    def configure(args={})    
+    def configure(args={})
       # work out the default app_root
       if defined?(Merb)
         app_root = Merb.root
@@ -40,10 +40,10 @@ module HelpSpot
       else
         app_root = '.'
       end
-      
+
       config_file = args[:config_file] || '/config/help_spot.yml'
       yml_file    = app_root+config_file
-      
+
       raise yml_file+" not found" unless File.exist? yml_file
       @config = YAML.load_file(yml_file)
     end
@@ -63,7 +63,7 @@ module HelpSpot
     # * urgent
     #     A boolean flag. Defaults to false.
     #
-    def create(args)                   
+    def create(args)
       help_form = {:tNote       => args[:note],
                    :xCategory   => args[:category],
                    :sFirstName  => args[:first_name],
@@ -72,15 +72,15 @@ module HelpSpot
                    :sEmail      => args[:email],
                    :sPhone      => args[:phone],
                    :fUrgent     => args[:urgent]}.reject!{|k,v| v == nil}
-                   
+
       JSON.parse(api_request('request.create', 'POST', help_form))['xRequest'] rescue []
     end
 
     # Returns an array of tickets belonging to a given user id.
-    # 
+    #
     # == Authentication
     # This method does require authentication.
-    # 
+    #
     # == Options
     # * user_id
     #     The user who's tickets you wish to view.
@@ -90,13 +90,13 @@ module HelpSpot
     end
 
     # Returns ticket categories.
-    # 
+    #
     # == Authentication
     # This method does require authentication.
-    # 
+    #
     # == Options
     # * include_deleted
-    #     true if you want to include deleted categories. 
+    #     true if you want to include deleted categories.
     #
     def categories(args={})
       res = api_request('private.request.getCategories', 'GET')
@@ -105,24 +105,24 @@ module HelpSpot
       unless args[:include_deleted] and args[:include_deleted] == true
         res.reject!{|k, v| v['fDeleted'] == '1'} rescue []
       end
-      
+
       return res
     end
-    
+
     # Returns an array of non-deleted categories, as key value pairs. Useful for select lists.
-    # 
+    #
     # == Authentication
     # This method does require authentication.
-    # 
+    #
     def category_key_value_pairs
       categories.collect{|k,v| [k,v['sCategory']]} rescue []
     end
-    
+
     # Returns non-deleted categories, with a list of predefined categories removed
     #
     def category_key_value_pairs_without(categories=nil)
       categories ||= @config['hidden_categories'] rescue nil
-      
+
       orig_categories = category_key_value_pairs
       if categories
         categories.each do |category|
@@ -131,13 +131,13 @@ module HelpSpot
       end
       orig_categories
     end
-    
+
     # Returns an array of forums
     #
     def forums_list
       JSON.parse(HelpSpot.api_request('forums.list'))['forum'] rescue []
     end
-    
+
     # Returns an array of forums
     #
     # == Options
@@ -146,7 +146,7 @@ module HelpSpot
     def forum_get(args)
       JSON.parse(HelpSpot.api_request('forums.get', 'GET', :xForumId => args[:forum_id])) rescue []
     end
-    
+
     # Returns an array of topics from a given forum
     #
     # == Options
@@ -160,7 +160,7 @@ module HelpSpot
     def forum_get_topics(args={})
       JSON.parse(HelpSpot.api_request('forums.getTopics', 'GET', {:xForumId => args[:forum_id]}.merge(args)))['topic'] rescue []
     end
-    
+
     # Returns an array of posts from a given topic
     #
     # == Options
@@ -170,33 +170,31 @@ module HelpSpot
     def forum_get_topic_posts(args={})
       JSON.parse(HelpSpot.api_request('forums.getPosts', 'GET', :xTopicId => args[:topic_id]))['post'] rescue []
     end
-    
 
-    #private
-      def api_request(api_method, http_method='POST', args={})
-        api_params =  {:method => api_method, :output => 'json'}.merge(args)
-        query_params = api_params.collect{|k,v| [k.to_s, v.to_s]} # [URI.encode(k.to_s),URI.encode(v.to_s.gsub(/\ /, '+'))]
-        built_query  = query_params.collect{|i| i.join('=')}.join('&') # make a query string
-    
-        ru = URI::parse(@config['root_url']) # where ru = ROOT_URL
-        merged_query = [built_query, (ru.query == '' ? nil : ru.query)].compact.join('&') # merge our generated query string with the ROOT_URL's query string
-    
-        url = URI::HTTP.new(ru.scheme, ru.userinfo, ru.host, ru.port, ru.registry, ru.path, ru.opaque, merged_query, ru.fragment)
-    
-        request = nil
-        if http_method == 'POST'
-          request = Net::HTTP::Post.new(url.path)
-          request.set_form_data(query_params)
-        else
-          request = Net::HTTP::Get.new(url.path+'?'+url.query)
-        end
-        request.basic_auth @config['username'], @config['password']
-        http = Net::HTTP.new(url.host, url.port)
-        http.use_ssl = (url.scheme == 'https')
-        response = http.start { |h| h.request(request) }
+    def api_request(api_method, http_method='POST', args={})
+      api_params =  {:method => api_method, :output => 'json'}.merge(args)
+      query_params = api_params.collect{|k,v| [k.to_s, v.to_s]} # [URI.encode(k.to_s),URI.encode(v.to_s.gsub(/\ /, '+'))]
+      built_query  = query_params.collect{|i| i.join('=')}.join('&') # make a query string
 
-        response.body
+      ru = URI::parse(@config['root_url']) # where ru = ROOT_URL
+      merged_query = [built_query, (ru.query == '' ? nil : ru.query)].compact.join('&') # merge our generated query string with the ROOT_URL's query string
+
+      url = URI::HTTP.new(ru.scheme, ru.userinfo, ru.host, ru.port, ru.registry, ru.path, ru.opaque, merged_query, ru.fragment)
+
+      request = nil
+      if http_method == 'POST'
+        request = Net::HTTP::Post.new(url.path)
+        request.set_form_data(query_params)
+      else
+        request = Net::HTTP::Get.new(url.path+'?'+url.query)
       end
-      
+      request.basic_auth @config['username'], @config['password']
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = (url.scheme == 'https')
+      response = http.start { |h| h.request(request) }
+
+      response.body
+    end
+
   end # class
 end # module

@@ -1,14 +1,14 @@
 spec = Gem::Specification.new do |s|
   s.name      =   "help_spot"
   s.version   =   "0.0.1.4"
-  s.authors   =   ["Jamie Wilson"]
+  s.authors   =   ["Jamie Wilson","Jesse Newland"]
   s.date      =   "2009-02-09"
   s.email     =   "wilson@almlabs.com"
   s.summary   =   "A package for interacting with UserScape's HelpSpot product."
   s.has_rdoc  =   true
 
   s.files     =   %w(
-                    README
+                    README.rdoc
                     LICENSE
                     History.txt
                     lib/help_spot.rb

@@ -1,4 +1,3 @@
-
 = HelpSpot
 
 Ruby gem to talk to the API of a HelpSpot instance.
@@ -24,4 +23,3 @@ Somewhere in your application, you'll want to do this once:
 In my app, it also turns out it's useful to do this once:
 
 <tt>HELPSPOT_CATEGORIES = HelpSpot.category_key_value_pairs</tt>
-
