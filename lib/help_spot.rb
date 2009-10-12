@@ -15,7 +15,7 @@ require 'json'
 # Copy and edit the included config file. Include the gem in your app. Call the configure method. Hit the API.
 #
 #   require 'help_spot'
-#   HelpSpot.configure(:app_root => '/my_app/')
+#   HelpSpot.configure(:config_file => '/path/to/help_spot.yml')
 #   HelpSpot.forums_list
 #
 #   => [{"xForumId"=>"1", "fClosed"=>"0", "sForumName"=>"The First Forum", "iOrder"=>"0", "sDescription"=>"A test forum"}, {"xForumId"=>"2", "fClosed"=>"0", "sForumName"=>"Secondary Forum", "iOrder"=>"0", "sDescription"=>"Forum #2"}]
@@ -27,16 +27,13 @@ module HelpSpot
     # Loads the config file.
     # 
     # == Options
-    # * app_root (optional)
-    #     Path to the root directory of your app. Shouldn't be required when using merb or Rails.
     # * config_file (optional)
     #     Defaults to '/config/help_spot.yml'
+    #     Shouldn't be required when using merb or Rails.
     #
     def configure(args={})    
       # work out the default app_root
-      if args[:app_root]
-        app_root = args[:app_root]
-      elsif defined?(Merb)
+      if defined?(Merb)
         app_root = Merb.root
       elsif defined?(Rails)
         app_root = RAILS_ROOT
@@ -203,11 +200,3 @@ module HelpSpot
       
   end # class
 end # module
-
-
-if defined?(Merb::Plugins)
-  Merb::BootLoader.after_app_loads do
-    HelpSpot.configure
-    HELPSPOT_CATEGORIES = HelpSpot.category_key_value_pairs_without().sort rescue []
-  end
-end
