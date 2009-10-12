@@ -1,5 +1,6 @@
 require 'uri'
 require 'net/http'
+require 'net/https'
 require 'json'
 
 ##
@@ -185,18 +186,19 @@ module HelpSpot
     
         url = URI::HTTP.new(ru.scheme, ru.userinfo, ru.host, ru.port, ru.registry, ru.path, ru.opaque, merged_query, ru.fragment)
     
+        request = nil
         if http_method == 'POST'
-          req = Net::HTTP::Post.new(url.path)
-          req.set_form_data(query_params)
-          req.basic_auth @config['username'], @config['password']
-          res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
+          request = Net::HTTP::Post.new(url.path)
+          request.set_form_data(query_params)
         else
-          req = Net::HTTP::Get.new(url.path+'?'+url.query)
-          req.basic_auth @config['username'], @config['password']
-          res = Net::HTTP.start(url.host, url.port) {|http| http.request(req) }
+          request = Net::HTTP::Get.new(url.path+'?'+url.query)
         end
+        request.basic_auth @config['username'], @config['password']
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = (url.scheme == 'https')
+        response = http.start { |h| h.request(request) }
 
-        res.body
+        response.body
       end
       
   end # class
