@@ -89,6 +89,56 @@ module HelpSpot
       JSON.parse(api_request('private.request.search', 'GET', {:sUserId => args[:user_id]}))['request'] rescue nil
     end
 
+    # Return all information on a request.
+    #
+    # == Authentication
+    # This method does require authentication.
+    #
+    def request(id)
+      JSON.parse(api_request('private.request.get', 'GET', {:xRequest => id})) rescue nil
+    end
+
+    # Returns a list of custom fields.
+    #
+    # == Authentication
+    # This method does require authentication.
+    #
+    # == Options
+    # * xCategory
+    #     Optionally limit the results to one categories custom fields
+    def custom_fields(args = {})
+      JSON.parse(api_request('private.request.getCustomFields', 'GET', args))['field'] rescue nil
+    end
+
+    # Returns an array of time events matching a search
+    #
+    # == Authentication
+    # This method does require authentication.
+    #
+    # == Options
+    # * sUserId
+    # * sEmail
+    # * sFirstName
+    # * sLastName
+    # * fOpen
+    # * xStatus
+    # * xMailbox
+    # * fOpenedVia
+    # * xCategory
+    # * fUrgent
+    # * xPersonAssignedTo
+    # * xPersonOpenedBy
+    # * Custom#
+    # * start_time (30 days back by default, set to 0 for all time)
+    # * end_time (right now by default)
+    # * fRawValues
+    # * orderBy (defaults to dtGMTDate)
+    # * orderByDir (desc or asc)
+    #
+    def timetracker_search(args = {})
+      JSON.parse(api_request('private.timetracker.search', 'GET', args))['event'] rescue nil
+    end
+
     # Returns ticket categories.
     #
     # == Authentication
