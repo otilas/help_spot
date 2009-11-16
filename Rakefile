@@ -11,6 +11,8 @@ begin
     gem.homepage = "http://github.com/jnewland/help_spot"
     gem.authors = ["Jamie Wilson","Jesse Newland"]
     gem.add_development_dependency "rspec"
+    gem.add_development_dependency "yard"
+    gem.add_dependency 'json'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -34,16 +36,7 @@ task :spec => :check_dependencies
 
 task :default => :spec
 
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION')
-    version = File.read('VERSION')
-  else
-    version = ""
-  end
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "help_spot #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+require 'yard'
+YARD::Rake::YardocTask.new do |t|
+  t.files   = ['lib/**/*.rb', 'README.rdoc']
 end
