@@ -29,23 +29,21 @@ module HelpSpot
     # == Options
     # * config_file (optional)
     #     Defaults to '/config/help_spot.yml'
-    #     Shouldn't be required when using merb or Rails.
     #
+    # OR
+    #
+    # * root_url
+    # * username
+    # * password
     def configure(args={})
-      # work out the default app_root
-      if defined?(Merb)
-        app_root = Merb.root
-      elsif defined?(Rails)
-        app_root = RAILS_ROOT
+      config_file = args[:config_file] || './config/help_spot.yml'
+      if File.exist?(config_file)
+        @config = YAML.load_file(config_file).symbolize_keys
       else
-        app_root = '.'
+        @config = args.symbolize_keys
       end
-
-      config_file = args[:config_file] || '/config/help_spot.yml'
-      yml_file    = app_root+config_file
-
-      raise yml_file+" not found" unless File.exist? yml_file
-      @config = YAML.load_file(yml_file)
+      raise "root_url, username, and password required in HelpSpot.configure" unless @config[:root_url] && @config[:username] && @config[:password]
+      @config
     end
 
     # sends a feedback request to HelpSpot and returns the request ID number and access key
@@ -74,6 +72,14 @@ module HelpSpot
                    :fUrgent     => args[:urgent]}.reject!{|k,v| v == nil}
 
       JSON.parse(api_request('request.create', 'POST', help_form))['xRequest'] rescue []
+    end
+
+    # Verify authentication credentials
+    #
+    def authenticated?
+      !JSON.parse(api_request('private.version', 'GET'))["version"].nil?
+    rescue
+      false
     end
 
     # Returns an array of tickets belonging to a given user id.
@@ -226,7 +232,7 @@ module HelpSpot
       query_params = api_params.collect{|k,v| [k.to_s, v.to_s]} # [URI.encode(k.to_s),URI.encode(v.to_s.gsub(/\ /, '+'))]
       built_query  = query_params.collect{|i| i.join('=')}.join('&') # make a query string
 
-      ru = URI::parse(@config['root_url']) # where ru = ROOT_URL
+      ru = URI::parse(@config[:root_url]) # where ru = ROOT_URL
       merged_query = [built_query, (ru.query == '' ? nil : ru.query)].compact.join('&') # merge our generated query string with the ROOT_URL's query string
 
       url = URI::HTTP.new(ru.scheme, ru.userinfo, ru.host, ru.port, ru.registry, ru.path, ru.opaque, merged_query, ru.fragment)
@@ -238,7 +244,7 @@ module HelpSpot
       else
         request = Net::HTTP::Get.new(url.path+'?'+url.query)
       end
-      request.basic_auth @config['username'], @config['password']
+      request.basic_auth @config[:username], @config[:password]
       http = Net::HTTP.new(url.host, url.port)
       http.use_ssl = (url.scheme == 'https')
       response = http.start { |h| h.request(request) }
@@ -248,3 +254,14 @@ module HelpSpot
 
   end # class
 end # module
+
+unless Hash.instance_methods.include?("symbolize_keys")
+  class Hash #:nodoc:
+    def symbolize_keys
+      inject({}) do |options, (key, value)|
+        options[(key.to_sym rescue key) || key] = value
+        options
+      end
+    end
+  end
+end
