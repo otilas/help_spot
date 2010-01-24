@@ -1,5 +1,4 @@
 pkg
 doc
 *.gem
-config/help_spot.yml
-.yardoc
+*.gemspec

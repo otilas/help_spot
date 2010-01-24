@@ -1,24 +1,25 @@
-require 'rubygems'
-require 'rake'
+$LOAD_PATH.unshift 'lib'
+require 'help_spot/version'
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "help_spot"
-    gem.summary = %Q{A package for interacting with UserScape's HelpSpot product.}
-    gem.description = %Q{A package for interacting with UserScape's HelpSpot product.}
+    gem.version = HelpSpot::VERSION
+    gem.name = "helpspot"
+    gem.summary = %Q{API wrapper for HelpSpot}
+    gem.description = %Q{API wrapper for HelpSpot}
     gem.email = "jnewland@gmail.com"
     gem.homepage = "http://github.com/jnewland/help_spot"
-    gem.authors = ["Jamie Wilson","Jesse Newland"]
-    gem.add_development_dependency "rspec"
+    gem.authors = ["Jesse Newland"]
+    gem.add_development_dependency "rspec", "= 1.3.0"
     gem.add_development_dependency "fakeweb"
-    gem.add_development_dependency "yard"
-    gem.add_dependency 'json'
+    gem.add_dependency "hashie", "~> 0.1.8"
+    gem.add_dependency "httparty", "~> 0.5.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
 require 'spec/rake/spectask'
@@ -37,7 +38,12 @@ task :spec => :check_dependencies
 
 task :default => :spec
 
-require 'yard'
-YARD::Rake::YardocTask.new do |t|
-  t.files   = ['lib/**/*.rb', 'README.rdoc']
+require 'rake/rdoctask'
+Rake::RDocTask.new do |rdoc|
+  version = HelpSpot::VERSION
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "help_spot #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
 end

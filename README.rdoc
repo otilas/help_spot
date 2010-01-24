@@ -12,17 +12,11 @@ A gem has been pushed to gemcutter[http://gemcutter.org/]
 
 Once you have gemcutter setup as a gem source:
 
-<tt>gem install help_spot</tt>
+  gem install help_spot
 
 = Usage
 
-You'll need to set your API credentials via either a config file (sample is at config/help_spot.yml.sample):
-
-<tt>HelpSpot.configure :config_file => 'path/to/help_spot.yml'</tt>
-
-Or manually:
-
-<tt>HelpSpot.configure :root_url => "https://support.local/api/index.php?format=json", :username => "user@localhost.com", :password => "sekrit"</tt>
+  help_spot = HelpSpot.new("https://support.yourwebsite.com/api/", "user@localhost.com", "sekrit")
 
 == Documentation
 

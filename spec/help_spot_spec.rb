@@ -1,27 +1,21 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "HelpSpot" do
+  it "should provide a version constant" do
+    HelpSpot::VERSION.should be_instance_of(String)
+  end
   before :each do
-    HelpSpot.configure :root_url => "https://support.local/api/index.php?format=json",
-      :username => "user@localhost.com",
-      :password => "sekrit"
+    @help_spot = HelpSpot.new("https://support.local/api/", "user@localhost.com", "sekrit")
   end
 
-  it "requires root_url, username, and password" do
-    lambda { HelpSpot.configure :username => 'foo', :password => 'foo' }.should raise_error
-    lambda { HelpSpot.configure :root_url => 'foo', :password => 'foo' }.should raise_error
-    lambda { HelpSpot.configure :root_url => 'foo', :username => 'foo' }.should raise_error
-    lambda { HelpSpot.configure :root_url => nil, :username => nil, :password => nil }.should raise_error
-  end
-
-  it "can verify authentication" do
-    FakeWeb.register_uri(:get, "https://user%40localhost.com:sekrit@support.local/api/index.php?output=json&method=private.version&format=json",
-      [
-        {:body => "{\"error\":[{\"id\":2,\"description\":\"User authentication failed\"}]}", :status => ["401", "Unauthorized"]},
-        {:body => "{\"version\":\"1.2\",\"min_version\":\"1.0\"}"}
-      ]
-    )
-    HelpSpot.authenticated?.should be_false
-    HelpSpot.authenticated?.should be_true
+  describe "verifying authentcation" do
+    it "returns true when properly authenticated" do
+      stub_http_response_with('version.xml')
+      @help_spot.authenticated?.should be_true
+    end
+    it "returns false when not properly authenticated" do
+      stub_http_response_with('error.xml')
+      @help_spot.authenticated?.should be_false
+    end
   end
 end
