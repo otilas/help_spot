@@ -46,7 +46,15 @@ class HelpSpot
 private
 
   def api_request(http_method, method, options = {}, munge_options = {})
-    response = self.class.send(http_method, '', options.merge(:method => method))
+    parsed_options = {}
+    if http_method == :get
+      parsed_options[:query] = options
+    else
+      parsed_options[:query] = {}
+      parsed_options[:body] = options
+    end
+    parsed_options[:query].merge!(:method => method)
+    response = self.class.send(http_method, '/index.php', parsed_options)
     if munge_options[:collection]
       collection = response[munge_options[:collection]][munge_options[:item]].map { |item| Hashie::Mash.new(item) }
       if collection.length == 1
