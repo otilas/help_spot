@@ -19,5 +19,5 @@ def stub_http_response_with(filename)
   http_request = HTTParty::Request.new(Net::HTTP::Get, 'http://localhost', :format => format)
   http_request.stub!(:perform_actual_request).and_return(response)
 
-  HTTParty::Request.should_receive(:new).and_return(http_request)
+  HTTParty::Request.should_receive(:new).at_least(1).and_return(http_request)
 end

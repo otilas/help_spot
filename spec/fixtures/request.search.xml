@@ -1,0 +1,52 @@
+<requests>
+<request>
+<xRequest>12650</xRequest>
+<fOpenedVia>Phone</fOpenedVia>
+<xOpenedViaId>0</xOpenedViaId>
+<xPersonOpenedBy>Ian Landsman</xPersonOpenedBy>
+<xPersonAssignedTo>Ian Landsman</xPersonAssignedTo>
+<fOpen>1</fOpen>
+<xStatus>Active</xStatus>
+<fUrgent>1</fUrgent>
+<xCategory>Bugs</xCategory>
+<dtGMTOpened>January 16, 2006</dtGMTOpened>
+<dtGMTClosed />
+<sRequestPassword>oxvgys</sRequestPassword>
+<sTitle>RE: Update on Your Request</sTitle>
+<sUserId />
+<sFirstName />
+<sLastName>landsman</sLastName>
+<sEmail />
+<sPhone />
+<iLastReplyBy>0</iLastReplyBy>
+<fTrash>0</fTrash>
+<dtGMTTrashed />
+<fullname> landsman</fullname>
+<tNote><span class="initsubject">Some text here</span> - Help with printer issue please.</tNote>
+</request>
+<request>
+<xRequest>12733</xRequest>
+<fOpenedVia>Web Service</fOpenedVia>
+<xOpenedViaId>0</xOpenedViaId>
+<xPersonOpenedBy />
+<xPersonAssignedTo>Ian Landsman</xPersonAssignedTo>
+<fOpen>1</fOpen>
+<xStatus>Active</xStatus>
+<fUrgent>0</fUrgent>
+<xCategory>Bugs</xCategory>
+<dtGMTOpened>September 13, 2007</dtGMTOpened>
+<dtGMTClosed />
+<sRequestPassword>bwpkqv</sRequestPassword>
+<sTitle />
+<sUserId>567</sUserId>
+<sFirstName />
+<sLastName />
+<sEmail />
+<sPhone />
+<iLastReplyBy>0</iLastReplyBy>
+<fTrash>0</fTrash>
+<dtGMTTrashed />
+<fullname> </fullname>
+<tNote><span class="initsubject">Text Here</span> - Need printer assistance.</tNote>
+</request>
+</requests>

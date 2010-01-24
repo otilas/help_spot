@@ -7,7 +7,6 @@ describe "HelpSpot" do
   before :each do
     @help_spot = HelpSpot.new("https://support.local/api/", "user@localhost.com", "sekrit")
   end
-
   describe "verifying authentcation" do
     it "returns true when properly authenticated" do
       stub_http_response_with('version.xml')
@@ -18,4 +17,44 @@ describe "HelpSpot" do
       @help_spot.authenticated?.should be_false
     end
   end
+
+  describe 'requests' do
+    describe "being created" do
+      before(:each) do
+        stub_http_response_with('request.id.xml')
+      end
+      it "require a note, a category, and some contact info" do
+        lambda { @help_spot.create_request() }.should raise_exception
+        lambda { @help_spot.create_request(:tNote => 'foo') }.should raise_exception
+        lambda { @help_spot.create_request(:xCategory => 1) }.should raise_exception
+        lambda { @help_spot.create_request(:tNote => 'foo', :xCategory => 1) }.should raise_exception
+        %w(sFirstName sLastName sUserId sEmail sPhone).each do |valid_contact_info|
+          lambda { @help_spot.create_request(:tNote => 'foo', :xCategory => 1, valid_contact_info.intern => 'foo') }.should_not raise_exception
+        end
+      end
+      it "return the request id" do
+        @help_spot.create_request(:tNote => 'foo', :xCategory => 1, :sEmail => 'needy@customer.com').should == 12746
+      end
+    end
+    describe "being updated" do
+      before(:each) do
+        stub_http_response_with('request.id.xml')
+      end
+      it "return the request id" do
+        @help_spot.update_request(12746, :tNote => 'foo', :xCategory => 1, :sEmail => 'needy@customer.com').should == 12746
+      end
+    end
+    it "should be accessible" do
+      stub_http_response_with('request.get.xml')
+      request = @help_spot.request(12745)
+      request.xPersonAssignedTo.should == 'Ian Landsman'
+      request.request_history.first.xPerson.should == 'Ian Landsman'
+    end
+    it "should be searchable" do
+      stub_http_response_with('request.search.xml')
+      requests = @help_spot.search_requests(:sSearch => 'printer')
+      requests.first.xPersonAssignedTo.should == 'Ian Landsman'
+    end
+  end
+
 end

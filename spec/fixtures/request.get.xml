@@ -1,0 +1,89 @@
+<request>
+<xRequest>12745</xRequest>
+<fOpenedVia>Web Service</fOpenedVia>
+<xOpenedViaId>0</xOpenedViaId>
+<xPersonOpenedBy />
+<xPersonAssignedTo>Ian Landsman</xPersonAssignedTo>
+<fOpen>1</fOpen>
+<xStatus>Active</xStatus>
+<fUrgent>0</fUrgent>
+<xCategory>Bugs</xCategory>
+<dtGMTOpened>September 24, 2007</dtGMTOpened>
+<dtGMTClosed />
+<sRequestPassword>itetxb</sRequestPassword>
+<sTitle />
+<sUserId>12345</sUserId>
+<sFirstName />
+<sLastName />
+<sEmail />
+<sPhone />
+<iLastReplyBy>Ian Landsman</iLastReplyBy>
+<fTrash>0</fTrash>
+<dtGMTTrashed />
+<fullname> </fullname>
+<request_history>
+<item>
+<xRequestHistory>1378</xRequestHistory>
+<xRequest>12745</xRequest>
+<xPerson>Ian Landsman</xPerson>
+<dtGMTChange>Tue, September 25, 2007, 11:00 AM</dtGMTChange>
+<fPublic>1</fPublic>
+<fInitial>0</fInitial>
+<tLog />
+<tNote><p>An HTML note example</p></tNote>
+<tEmailHeaders />
+<fNoteIsHTML>1</fNoteIsHTML>
+<fMergedFromRequest>0</fMergedFromRequest>
+<files>
+<file>
+<sFileMimeType>application/pdf</sFileMimeType>
+<sFilename>Invoice.pdf</sFilename>
+<xDocumentId>60</xDocumentId>
+<public_url>http://www.domain.com/index.php?pg=file&from=3&id=60&reqid=12745&reqhisid=1378</public_url>
+<private_url>http://www.domain.com/admin.php?pg=file&from=0&id=60&showfullsize=1&download=1</private_url>
+</file>
+</files>
+</item>
+<item>
+<xRequestHistory>1377</xRequestHistory>
+<xRequest>12745</xRequest>
+<xPerson>Ian Landsman</xPerson>
+<dtGMTChange>Tue, September 25, 2007, 11:00 AM</dtGMTChange>
+<fPublic>0</fPublic>
+<fInitial>0</fInitial>
+<tLog>Category changed from "" to "Bugs"</tLog>
+<tNote />
+<tEmailHeaders />
+<fNoteIsHTML>0</fNoteIsHTML>
+<fMergedFromRequest>0</fMergedFromRequest>
+</item>
+<item>
+<xRequestHistory>1376</xRequestHistory>
+<xRequest>12745</xRequest>
+<xPerson> </xPerson>
+<dtGMTChange>Mon, September 24, 2007, 08:03 PM</dtGMTChange>
+<fPublic>1</fPublic>
+<fInitial>0</fInitial>
+<tLog />
+<tNote>Plain text update to the request.</tNote>
+<tEmailHeaders />
+<fNoteIsHTML>0</fNoteIsHTML>
+<fMergedFromRequest>0</fMergedFromRequest>
+<files />
+</item>
+<item>
+<xRequestHistory>1375</xRequestHistory>
+<xRequest>12745</xRequest>
+<xPerson> </xPerson>
+<dtGMTChange>Mon, September 24, 2007, 07:44 PM</dtGMTChange>
+<fPublic>1</fPublic>
+<fInitial>1</fInitial>
+<tLog />
+<tNote>This is the request.</tNote>
+<tEmailHeaders />
+<fNoteIsHTML>0</fNoteIsHTML>
+<fMergedFromRequest>0</fMergedFromRequest>
+<files />
+</item>
+</request_history>
+</request>
