@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.version = HelpSpot::VERSION
-    gem.name = "helpspot"
+    gem.name = "help_spot"
     gem.summary = %Q{API wrapper for HelpSpot}
     gem.description = %Q{API wrapper for HelpSpot}
     gem.email = "jnewland@gmail.com"
