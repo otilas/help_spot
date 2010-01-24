@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<categories>
+<category>
+<xCategory>1</xCategory>
+<sCategory>Pre Sales Question</sCategory>
+<fDeleted>0</fDeleted>
+<fAllowPublicSubmit>1</fAllowPublicSubmit>
+<xPersonDefault>1</xPersonDefault>
+<fAutoAssignTo>0</fAutoAssignTo>
+<sPersonList>
+<person>
+<xPerson>3</xPerson>
+<fullname>Steve Benson</fullname>
+<assigned_requests>6</assigned_requests>
+</person>
+<person>
+<xPerson>4</xPerson>
+<fullname>Tiffany Prince</fullname>
+<assigned_requests>7</assigned_requests>
+</person>
+<person>
+<xPerson>5</xPerson>
+<fullname>Henry Yount</fullname>
+<assigned_requests>8</assigned_requests>
+</person>
+</sPersonList>
+<sCustomFieldList>
+<xCustomField>2</xCustomField>
+<xCustomField>13</xCustomField>
+</sCustomFieldList>
+<reportingTags>
+<tag>
+<xReportingTag>5</xReportingTag>
+<sReportingTag>Pricing</sReportingTag>
+</tag>
+<tag>
+<xReportingTag>9</xReportingTag>
+<sReportingTag>Support Options</sReportingTag>
+</tag>
+<tag>
+<xReportingTag>7</xReportingTag>
+<sReportingTag>System Requirements</sReportingTag>
+</tag>
+</reportingTags>
+</category>
+</categories>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<filter>
+<request>
+<xRequest>12624</xRequest>
+<fOpenedVia>Email</fOpenedVia>
+<xOpenedViaId>Customer.Service</xOpenedViaId>
+<xPersonOpenedBy />
+<xPersonAssignedTo>Henry Yount</xPersonAssignedTo>
+<fOpen>1</fOpen>
+<xStatus>Active</xStatus>
+<fUrgent>0</fUrgent>
+<xCategory>Feature Request</xCategory>
+<dtGMTOpened>July 12, 2007</dtGMTOpened>
+<dtGMTClosed />
+<sRequestPassword>pgupzu</sRequestPassword>
+<sTitle>Upload documents over 1gig</sTitle>
+<sUserId>8389332</sUserId>
+<sFirstName>Harry</sFirstName>
+<sLastName>Waterman</sLastName>
+<sEmail>hw@example.com</sEmail>
+<sPhone>845.555.1234</sPhone>
+<iLastReplyBy>0</iLastReplyBy>
+<fTrash>0</fTrash>
+<dtGMTTrashed />
+<fullname>Harry Waterman</fullname>
+<tNote>I would like to be able to upload documents over 1 gigabyte.</tNote>
+</request>
+<request>
+<xRequest>12451</xRequest>
+<fOpenedVia>Phone</fOpenedVia>
+<xOpenedViaId />
+<xPersonOpenedBy>Tiffany Prince</xPersonOpenedBy>
+<xPersonAssignedTo>Henry Yount</xPersonAssignedTo>
+<fOpen>0</fOpen>
+<xStatus>Problem Solved</xStatus>
+<fUrgent>0</fUrgent>
+<xCategory>Feature Request</xCategory>
+<dtGMTOpened>September 19, 2007</dtGMTOpened>
+<dtGMTClosed>September 30, 2007</dtGMTClosed>
+<sRequestPassword>vyzfua</sRequestPassword>
+<sTitle>Improved searching</sTitle>
+<sUserId />
+<sFirstName>Sarah</sFirstName>
+<sLastName>Ryan</sLastName>
+<sEmail />
+<sPhone />
+<iLastReplyBy>0</iLastReplyBy>
+<fTrash>0</fTrash>
+<dtGMTTrashed />
+<fullname>Sarah Ryan</fullname>
+<tNote>I would like to see the searching imrpoved in the upcoming release.</tNote>
+</request>
+</filter>

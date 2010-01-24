@@ -39,8 +39,23 @@ class HelpSpot
   end
 
   def search_requests(options = {})
-    response = api_request(:get, 'private.request.search', options, {:collection => 'requests', :item => 'request'})
-    response
+    api_request(:get, 'private.request.search', options, {:collection => 'requests', :item => 'request'})
+  end
+
+  def categories
+    api_request(:get, 'private.request.getCategories', {:fDeleted => 0}, {:collection => 'categories', :item => 'category'})
+  end
+
+  def status_types
+    api_request(:get, 'private.request.getStatusTypes', {:fActiveOnly => 1}, {:collection => 'results', :item => 'status'})
+  end
+
+  def custom_fields(options = {})
+    api_request(:get, 'private.request.getCustomFields', options, {:collection => 'customfields', :item => 'field'})
+  end
+
+  def filter(id, options = {})
+    api_request(:get, 'private.filter.get', options.merge(:xFilter => id), {:collection => 'filter', :item => 'request'})
   end
 
 private
@@ -56,11 +71,11 @@ private
     parsed_options[:query].merge!(:method => method)
     response = self.class.send(http_method, '/index.php', parsed_options)
     if munge_options[:collection]
-      collection = response[munge_options[:collection]][munge_options[:item]].map { |item| Hashie::Mash.new(item) }
-      if collection.length == 1
-        collection.first
+      return [] unless collection = response[munge_options[:collection]][munge_options[:item]]
+      if collection.is_a?(Array)
+        collection.map { |item| Hashie::Mash.new(item) }
       else
-        collection
+        Hashie::Mash.new(collection)
       end
     elsif munge_options[:item]
       Hashie::Mash.new(response[munge_options[:item]])

@@ -56,5 +56,32 @@ describe "HelpSpot" do
       requests.first.xPersonAssignedTo.should == 'Ian Landsman'
     end
   end
-
+  describe 'categories' do
+    it "can be listed" do
+      @help_spot.stub_get('/api/index.php?method=private.request.getCategories&fDeleted=0', 'request.getCategories.xml')
+      categories = @help_spot.categories
+      categories.sCategory.should == 'Pre Sales Question'
+    end
+  end
+  describe 'statuses' do
+    it "can be listed" do
+      @help_spot.stub_get('/api/index.php?method=private.request.getStatusTypes&fActiveOnly=1', 'request.getStatusTypes.xml')
+      statues = @help_spot.status_types
+      statues.first.sStatus.should == 'Active'
+    end
+  end
+  describe 'custom fields' do
+    it "can be listed" do
+      @help_spot.stub_get('/api/index.php?method=private.request.getCustomFields', 'request.getCustomFields.xml')
+      fields = @help_spot.custom_fields
+      fields.first.fieldName.should == 'Ajax Lookup'
+    end
+  end
+  describe 'filters' do
+    it "can have their requests retrieved" do
+      @help_spot.stub_get('/api/index.php?method=private.filter.get&xFilter=1234', 'filter.get.xml')
+      requests = @help_spot.filter(1234)
+      requests.first.tNote.should == 'I would like to be able to upload documents over 1 gigabyte.'
+    end
+  end
 end

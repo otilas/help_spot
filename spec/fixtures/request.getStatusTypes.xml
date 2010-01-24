@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<results>
+<status>
+<sStatus>Active</sStatus>
+<xStatus>1</xStatus>
+</status>
+<status>
+<sStatus>Problem Solved</sStatus>
+ 
+<xStatus>3</xStatus>
+</status>
+<status>
+<sStatus>Not Fixable</sStatus>
+<xStatus>4</xStatus>
+</status>
+<status>
+ 
+<sStatus>Customer Unreachable</sStatus>
+<xStatus>5</xStatus>
+</status>
+<status>
+<sStatus>Customer Found Solution</sStatus>
+<xStatus>6</xStatus>
+</status>
+ 
+<status>
+<sStatus>Software Bug</sStatus>
+<xStatus>7</xStatus>
+</status>
+<status>
+<sStatus>SPAM</sStatus>
+<xStatus>2</xStatus>
+ 
+</status>
+</results>

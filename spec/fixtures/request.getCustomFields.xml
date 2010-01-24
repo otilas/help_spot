@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<customfields>
+<field>
+<xCustomField>10</xCustomField>
+<fieldName>Ajax Lookup</fieldName>
+<isRequired>1</isRequired>
+<isPublic>0</isPublic>
+<fieldType>ajax</fieldType>
+<iOrder>0</iOrder>
+<sTxtSize />
+<lrgTextRows />
+<listItems />
+<iDecimalPlaces>0</iDecimalPlaces>
+<sRegex />
+<sAjaxUrl>http://www.domain.com/ajax_field_lookup.php</sAjaxUrl>
+<isAlwaysVisible>0</isAlwaysVisible>
+</field>
+<field>
+<xCustomField>7</xCustomField>
+<fieldName>VIP Customer</fieldName>
+<isRequired>0</isRequired>
+<isPublic>1</isPublic>
+<fieldType>checkbox</fieldType>
+<iOrder>0</iOrder>
+<sTxtSize />
+<lrgTextRows />
+<listItems />
+<iDecimalPlaces>0</iDecimalPlaces>
+<sRegex />
+<sAjaxUrl />
+<isAlwaysVisible>0</isAlwaysVisible>
+</field>
+<field>
+<xCustomField>2</xCustomField>
+<fieldName>Database Type</fieldName>
+<isRequired>0</isRequired>
+<isPublic>1</isPublic>
+<fieldType>select</fieldType>
+<iOrder>0</iOrder>
+<sTxtSize />
+<lrgTextRows />
+<listItems>
+<item>MySQL</item>
+<item>MS SQL Server</item>
+<item>PostgreSQL</item>
+</listItems>
+<iDecimalPlaces>0</iDecimalPlaces>
+<sRegex />
+<sAjaxUrl />
+<isAlwaysVisible>0</isAlwaysVisible>
+</field>
+</customfields>
