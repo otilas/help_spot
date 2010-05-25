@@ -8,7 +8,6 @@ private.request.getTimeEvents
 private.request.getMailboxes
 private.request.merge
 private.filter.getColumnNames
-private.timetracker.search
 private.user.getFilters
 private.user.preferences
 private.util.getActiveStaff

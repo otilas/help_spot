@@ -84,4 +84,12 @@ describe "HelpSpot" do
       requests.first.tNote.should == 'I would like to be able to upload documents over 1 gigabyte.'
     end
   end
+  describe 'time tracking events' do
+    it "can be searched" do
+      @help_spot.stub_get('/api/index.php?method=private.timetracker.search&start_time=1', 'private.timetracker.search.xml')
+      time_events = @help_spot.search_time_events(:start_time => 1)
+      time_events.size.should == 2
+      time_events.first.iSeconds.should == "5400"
+    end
+  end
 end
