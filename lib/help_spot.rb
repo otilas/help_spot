@@ -75,11 +75,13 @@ private
     parsed_options[:query].merge!(:method => method)
     response = self.class.send(http_method, '/index.php', parsed_options)
     if munge_options[:collection]
-      return [] unless collection = response[munge_options[:collection]][munge_options[:item]]
+      unless collection = response[munge_options[:collection]][munge_options[:item]]
+        return []
+      end
       if collection.is_a?(Array)
         collection.map { |item| Hashie::Mash.new(item) }
       else
-        Hashie::Mash.new(collection)
+        [Hashie::Mash.new(collection)]
       end
     elsif munge_options[:item]
       Hashie::Mash.new(response[munge_options[:item]])

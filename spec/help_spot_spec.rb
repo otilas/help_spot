@@ -60,7 +60,7 @@ describe "HelpSpot" do
     it "can be listed" do
       @help_spot.stub_get('/api/index.php?method=private.request.getCategories&fDeleted=0', 'request.getCategories.xml')
       categories = @help_spot.categories
-      categories.sCategory.should == 'Pre Sales Question'
+      categories.first.sCategory.should == 'Pre Sales Question'
     end
   end
   describe 'statuses' do
