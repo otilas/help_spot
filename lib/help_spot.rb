@@ -34,7 +34,7 @@ class HelpSpot
   def request(id, options = {})
     response = api_request(:get, 'private.request.get', options.merge(:xRequest => id), :item => 'request')
     #munge even further the request history
-    response.request_history = response.request_history.map { |item| item[1].first }
+    response.request_history = response.request_history['item'] rescue []
     response
   end
 
