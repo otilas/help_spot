@@ -35,6 +35,7 @@ class HelpSpot
     response = api_request(:get, 'private.request.get', options.merge(:xRequest => id), :item => 'request')
     #munge even further the request history
     response.request_history = response.request_history['item'] rescue []
+    response.request_history = [response.request_history] unless response.request_history.is_a?(Array)
     response
   end
 

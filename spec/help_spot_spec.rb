@@ -53,7 +53,8 @@ describe "HelpSpot" do
     it "should have accessible history" do
       @help_spot.stub_get('/api/index.php?method=private.request.get&xRequest=12745', 'request.get.xml')
       request = @help_spot.request(12745)
-      request.request_history.length.should == 4
+      request.request_history.should be_an(Array)
+      request.request_history.length.should == 1
       request.request_history.first.xPerson.should == 'Ian Landsman'
     end
     it "should be searchable" do
