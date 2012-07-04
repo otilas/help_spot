@@ -63,6 +63,10 @@ class HelpSpot
     api_request(:get, 'private.timetracker.search', options, {:collection => 'time_events', :item => 'event'})
   end
 
+  def time_events(id, options = {})
+    api_request(:get, 'private.request.getTimeEvents', options.merge(:xRequest => id), {:collection => 'time_events', :item => 'event'})
+  end
+
 private
 
   def api_request(http_method, method, options = {}, munge_options = {})
