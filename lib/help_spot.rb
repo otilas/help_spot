@@ -7,6 +7,9 @@ class HelpSpot
   format :xml
   mattr_inheritable :base
 
+  class ApiErrors < RuntimeError
+  end
+
   def initialize(base, user, pass)
     self.class.base_uri base
     self.class.basic_auth user, pass
@@ -15,10 +18,12 @@ class HelpSpot
   # Verify authentication credentials
   #
   def authenticated?
-    version = api_request(:get, 'private.version')
-    return false if version.errors
-    return true if version.results.version
-    false
+    version = begin 
+                api_request(:get, 'private.version').results.version
+                true
+              rescue HelpSpot::ApiErrors => e
+                return false
+              end
   end
 
   def create_request(options = {})
@@ -79,6 +84,21 @@ private
     end
     parsed_options[:query].merge!(:method => method)
     response = self.class.send(http_method, '/index.php', parsed_options)
+
+    if errors = response['errors']
+      # JSON gets returned weirdly sometimes if there's a single error. it gets interpreted as a hash, rather than an array with one thing
+      if errors.kind_of?(Hash) 
+        errors = [errors['error']]
+      end
+
+      errors_string = errors.map do |error|
+        "* #{error['id']} - #{error['description']}"
+      end.join("\n")
+
+      raise ApiErrors, "#{errors.size} error(s) during #{method} API request:\n#{errors_string}"
+    end
+
+
     if munge_options[:collection]
       unless collection = response[munge_options[:collection]][munge_options[:item]]
         return []
