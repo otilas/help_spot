@@ -72,6 +72,15 @@ class HelpSpot
     api_request(:get, 'private.request.getTimeEvents', options.merge(:xRequest => id), {:collection => 'time_events', :item => 'event'})
   end
 
+  class Request < Hashie::Mash
+  end
+
+  class Event < Hashie::Mash
+  end
+
+  class Field < Hashie::Mash
+  end
+
 private
 
   def api_request(http_method, method, options = {}, munge_options = {})
@@ -99,19 +108,25 @@ private
     end
 
 
+    item_klass = if munge_options[:item]
+                   "HelpSpot::#{munge_options[:item].to_s.classify}".constantize
+                 else
+                   Hashie::Mash
+                 end
+
     if munge_options[:collection]
       unless collection = response[munge_options[:collection]][munge_options[:item]]
         return []
       end
       if collection.is_a?(Array)
-        collection.map { |item| Hashie::Mash.new(item) }
+        collection.map { |item| item_klass.new(item) }
       else
-        [Hashie::Mash.new(collection)]
+        [item_klass.new(collection)]
       end
     elsif munge_options[:item]
-      Hashie::Mash.new(response[munge_options[:item]])
+      item_klass.new(response[munge_options[:item]])
     else
-      Hashie::Mash.new(response)
+      item_klass.new(response)
     end
   end
 
