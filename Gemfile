@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'hashie', '~> 1.0.0'
+gem 'hashie', '~> 1.0'
 gem 'httparty', '~> 0.5'
 
 group :development do
