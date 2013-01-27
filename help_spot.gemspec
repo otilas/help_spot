@@ -5,10 +5,10 @@
 
 Gem::Specification.new do |s|
   s.name = "help_spot"
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jesse Newland"]
+  s.authors = ["Jesse Newland", "Josh Nichols"]
   s.date = "2013-01-27"
   s.description = "API wrapper for HelpSpot"
   s.email = "jnewland@gmail.com"
