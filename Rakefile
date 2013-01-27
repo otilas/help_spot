@@ -11,10 +11,6 @@ begin
     gem.email = "jnewland@gmail.com"
     gem.homepage = "http://github.com/jnewland/help_spot"
     gem.authors = ["Jesse Newland"]
-    gem.add_development_dependency "rspec", "= 1.3.0"
-    gem.add_development_dependency "fakeweb"
-    gem.add_dependency "hashie", "~> 1.0.0"
-    gem.add_dependency "httparty", "~> 0.5"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
