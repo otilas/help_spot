@@ -10,7 +10,7 @@ begin
     gem.description = %Q{API wrapper for HelpSpot}
     gem.email = "jnewland@gmail.com"
     gem.homepage = "http://github.com/jnewland/help_spot"
-    gem.authors = ["Jesse Newland"]
+    gem.authors = ["Jesse Newland", "Josh Nichols"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
